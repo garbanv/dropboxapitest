@@ -9,11 +9,11 @@ const fetch = require('node-fetch');
 var QRCode = require('qrcode')
 require('dotenv').config()
 const port = process.env.PORT || 4500
-/* const key=process.env.KEY */
+const key=process.env.KEY
 
 
-const key='sl.BQPN1Tfi4oWb4GUQ9pHMCdS-amVxeB9p62YYcMaCNjsnml9xOwV2j-38QhCSMcnF9fvauoZnEX8D4WN95iogZZAeSrOFdnStxMaREUQ8boIsX5lHMc06IhLcegnNDlw--DW761479rY'
-let async_job_id;
+/* const key='sl.BQPN1Tfi4oWb4GUQ9pHMCdS-amVxeB9p62YYcMaCNjsnml9xOwV2j-38QhCSMcnF9fvauoZnEX8D4WN95iogZZAeSrOFdnStxMaREUQ8boIsX5lHMc06IhLcegnNDlw--DW761479rY'
+ */let async_job_id;
 
 createMainFolder = async (res) => {
     console.log("main")
