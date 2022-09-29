@@ -7,11 +7,12 @@ app.use(express.json());
 app.use(urlencoded({extended:false}))
 const fetch = require('node-fetch');
 var QRCode = require('qrcode')
+require('dotenv').config()
 const port = process.env.PORT || 4500
-const key=process.env.KEY
+/* const key=process.env.KEY */
 
 
-/* const key='sl.BP_mW--L8WhDDaZren6SZRGriRo4iKQHICRXKiCwnlMSFHxVRwYGem9HwdcrMeBn7hhlchONZ8UxKWJERVa5uzD6QSYLA8_BRyrBUbcpO5dCVbfLFdzZPpko5mIVhT0WAxv6HNFOQKE' */
+const key='sl.BQPN1Tfi4oWb4GUQ9pHMCdS-amVxeB9p62YYcMaCNjsnml9xOwV2j-38QhCSMcnF9fvauoZnEX8D4WN95iogZZAeSrOFdnStxMaREUQ8boIsX5lHMc06IhLcegnNDlw--DW761479rY'
 let async_job_id;
 
 createMainFolder = async (res) => {
@@ -144,6 +145,8 @@ app.get("/", async (req,res)=>{
         console.timeEnd("time")
     }
     all()
+
+
 })
 
 app.get("/img", async (req,res)=>{
