@@ -11,12 +11,48 @@ const { URLSearchParams } = require('node:url');
 const buffer = require('buffer/').Buffer;
 require('dotenv').config()
 const port = process.env.PORT || 4500
+<<<<<<< HEAD
 /* const key=process.env.KEY */
 
+=======
+const key=process.env.KEY
+let tokenFromRefresh;
+>>>>>>> 9cf9d39 (updates)
 
 const key='sl.BQPN1Tfi4oWb4GUQ9pHMCdS-amVxeB9p62YYcMaCNjsnml9xOwV2j-38QhCSMcnF9fvauoZnEX8D4WN95iogZZAeSrOFdnStxMaREUQ8boIsX5lHMc06IhLcegnNDlw--DW761479rY'
 let async_job_id;
 
+<<<<<<< HEAD
+=======
+
+ const connectDropboxAndCreateFolders=async ()=>{
+    const clientIdSecretEncoded = buffer.from(`${process.env.DBXCLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64');
+      const urlencoded = new URLSearchParams();
+      urlencoded.append("grant_type", "refresh_token");
+      urlencoded.append("refresh_token", process.env.DBX_REFRESH_TOKEN);
+      const requestOptions = {
+         method: 'POST',
+          headers: {
+              "Authorization": `Basic ${clientIdSecretEncoded}`,
+              "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: urlencoded,
+          redirect: 'follow'
+      };
+      try {
+        const res= fetch("https://api.dropbox.com/oauth2/token", requestOptions)
+        const response = await res
+        const response1 = await response.json()
+        const accessTokenResult = await response1.access_token
+        tokenFromRefresh = await accessTokenResult
+
+       }
+        catch{
+            (error => console.log('error from connectDropboxAndCreateFolders', error))}
+
+    }
+
+>>>>>>> 9cf9d39 (updates)
 createMainFolder = async () => {
     console.log("main")
     console.log("tokenfromrefresh",tokenFromRefresh)
@@ -140,7 +176,16 @@ updateFolder = async (res) => {
 
         const dataResponse = await getData;
         console.log("dataResponse",dataResponse)
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9cf9d39 (updates)
+
+
+    } catch (e) {
+        console.log("an error ocurred sharing ", e)
+    }
+}
 
 
     } catch (e) {
@@ -174,7 +219,11 @@ app.get("/", async (req,res)=>{
     const all =async ()=>{
 
         console.time("time")
+<<<<<<< HEAD
         const a= await connectDropbox()
+=======
+        const a= await connectDropboxAndCreateFolders()
+>>>>>>> 9cf9d39 (updates)
         const x = await createMainFolder(res)
         /* const y  = await createImgFolder(res)
         const z = await getQRCode() */
@@ -198,6 +247,7 @@ app.get('/update',async (req,res)=>{
     const b = await updateFolder()
 })
 
+<<<<<<< HEAD
 
 app.get('/all', async (req,res)=>{
     const a = await connectDropbox()
@@ -214,6 +264,8 @@ app.get('/all', async (req,res)=>{
     const l = await shareFolder(client,folders[9])
     const m = await console.log("sucess")
 })
+=======
+>>>>>>> 9cf9d39 (updates)
 
 
 
