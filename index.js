@@ -25,7 +25,7 @@ let async_job_id;
 <<<<<<< HEAD
 =======
 
- const connectDropboxAndCreateFolders=async ()=>{
+ const connectDropbox=async ()=>{
     const clientIdSecretEncoded = buffer.from(`${process.env.DBXCLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64');
       const urlencoded = new URLSearchParams();
       urlencoded.append("grant_type", "refresh_token");
@@ -219,11 +219,7 @@ app.get("/", async (req,res)=>{
     const all =async ()=>{
 
         console.time("time")
-<<<<<<< HEAD
-        const a= await connectDropbox()
-=======
         const a= await connectDropboxAndCreateFolders()
->>>>>>> 9cf9d39 (updates)
         const x = await createMainFolder(res)
         /* const y  = await createImgFolder(res)
         const z = await getQRCode() */
