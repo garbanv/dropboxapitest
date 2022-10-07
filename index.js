@@ -13,36 +13,17 @@ require('dotenv').config()
 const port = process.env.PORT || 4500
 const key=process.env.KEY
 let tokenFromRefresh;
-
+const {connectDropbox,createAllFolders,shareFolder} = require ('./utils/functions.js')
 let async_job_id;
 
 
- const connectDropbox=async ()=>{
-    const clientIdSecretEncoded = buffer.from(`${process.env.DBXCLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64');
-      const urlencoded = new URLSearchParams();
-      urlencoded.append("grant_type", "refresh_token");
-      urlencoded.append("refresh_token", process.env.DBX_REFRESH_TOKEN);
-      const requestOptions = {
-         method: 'POST',
-          headers: {
-              "Authorization": `Basic ${clientIdSecretEncoded}`,
-              "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: urlencoded,
-          redirect: 'follow'
-      };
-      try {
-        const res= fetch("https://api.dropbox.com/oauth2/token", requestOptions)
-        const response = await res
-        const response1 = await response.json()
-        const accessTokenResult = await response1.access_token
-        tokenFromRefresh = await accessTokenResult
+const folders = [
+    'folder1','folder2','folder3','folder4','folder5','folder6','folder7','folder8','folder9','folder10'
+]
 
-       }
-        catch{
-            (error => console.log('error from connectDropboxAndCreateFolders', error))}
+const client ='A1234G'
 
-    }
+
 
 createMainFolder = async () => {
     console.log("main")
@@ -225,6 +206,22 @@ app.get('/update',async (req,res)=>{
     const b = await updateFolder()
 })
 
+
+app.get('/all', async (req,res)=>{
+    const a = await connectDropbox()
+    const b = await createAllFolders(client)
+    const c = await shareFolder(client,folders[0])
+    const d = await shareFolder(client,folders[1])
+    const e = await shareFolder(client,folders[2])
+    const f = await shareFolder(client,folders[3])
+    const g = await shareFolder(client,folders[4])
+    const h = await shareFolder(client,folders[5])
+    const i = await shareFolder(client,folders[6])
+    const j = await shareFolder(client,folders[7])
+    const k = await shareFolder(client,folders[8])
+    const l = await shareFolder(client,folders[9])
+    const m = await console.log("sucess")
+})
 
 
 
