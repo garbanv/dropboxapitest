@@ -11,19 +11,15 @@ const { URLSearchParams } = require('node:url');
 const buffer = require('buffer/').Buffer;
 require('dotenv').config()
 const port = process.env.PORT || 4500
-<<<<<<< HEAD
-/* const key=process.env.KEY */
 
-=======
-const key=process.env.KEY
+/* const key=process.env.KEY
 let tokenFromRefresh;
->>>>>>> 9cf9d39 (updates)
+ */
 
 const key='sl.BQPN1Tfi4oWb4GUQ9pHMCdS-amVxeB9p62YYcMaCNjsnml9xOwV2j-38QhCSMcnF9fvauoZnEX8D4WN95iogZZAeSrOFdnStxMaREUQ8boIsX5lHMc06IhLcegnNDlw--DW761479rY'
 let async_job_id;
 
-<<<<<<< HEAD
-=======
+
 
  const connectDropbox=async ()=>{
     const clientIdSecretEncoded = buffer.from(`${process.env.DBXCLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64');
@@ -50,9 +46,16 @@ let async_job_id;
         catch{
             (error => console.log('error from connectDropboxAndCreateFolders', error))}
 
-    }
+const {connectDropbox,createAllFolders,shareFolder} = require ('./utils/functions.js')
+let async_job_id;
 
->>>>>>> 9cf9d39 (updates)
+
+const folders = [
+    'folder1','folder2','folder3','folder4','folder5','folder6','folder7','folder8','folder9','folder10'
+]
+
+const client ='A1234G'
+
 createMainFolder = async () => {
     console.log("main")
     console.log("tokenfromrefresh",tokenFromRefresh)
@@ -150,7 +153,7 @@ createImgFolder = async (res) => {
     }
 }
 
-updateFolder = async (res) => {
+/* updateFolder = async (res) => {
     console.log("img")
     let mainFolderUrl;
     let folderPath;
@@ -176,10 +179,7 @@ updateFolder = async (res) => {
 
         const dataResponse = await getData;
         console.log("dataResponse",dataResponse)
-<<<<<<< HEAD
-=======
 
->>>>>>> 9cf9d39 (updates)
 
 
     } catch (e) {
@@ -191,7 +191,7 @@ updateFolder = async (res) => {
     } catch (e) {
         console.log("an error ocurred sharing ", e)
     }
-}
+} */
 
 
 const getQRCode= async ()=>{
@@ -243,7 +243,7 @@ app.get('/update',async (req,res)=>{
     const b = await updateFolder()
 })
 
-<<<<<<< HEAD
+
 
 app.get('/all', async (req,res)=>{
     const a = await connectDropbox()
@@ -260,8 +260,22 @@ app.get('/all', async (req,res)=>{
     const l = await shareFolder(client,folders[9])
     const m = await console.log("sucess")
 })
-=======
->>>>>>> 9cf9d39 (updates)
+
+app.get('/all', async (req,res)=>{
+    const a = await connectDropbox()
+    const b = await createAllFolders(client)
+    const c = await shareFolder(client,folders[0])
+    const d = await shareFolder(client,folders[1])
+    const e = await shareFolder(client,folders[2])
+    const f = await shareFolder(client,folders[3])
+    const g = await shareFolder(client,folders[4])
+    const h = await shareFolder(client,folders[5])
+    const i = await shareFolder(client,folders[6])
+    const j = await shareFolder(client,folders[7])
+    const k = await shareFolder(client,folders[8])
+    const l = await shareFolder(client,folders[9])
+    const m = await console.log("sucess")
+})
 
 
 
