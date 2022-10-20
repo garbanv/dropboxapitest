@@ -77,6 +77,43 @@ exports.createAllFolders = async (client) => {
 };
 
 
+exports.shareEventMainFolder = async (client) => {
+  console.log("tokenFromRefresh share",tokenFromRefresh)
+  try {
+      const getData = axios({
+          method: 'post',
+          url: 'https://api.dropboxapi.com/2/sharing/share_folder',
+          headers: {
+              'Content-Type': 'application/json',
+              authorization: `Bearer ${tokenFromRefresh}`,
+          },
+          data: {
+              "access_inheritance": "inherit",
+              "acl_update_policy": "editors",
+              "force_async": false,
+              "member_policy": "anyone",
+              "path": `/datagovernance/Events/${client}`,
+              "shared_link_policy": "anyone"
+          }
+      })
+
+      const dataResponse = await getData;
+      //console.log(dataResponse)
+      console.log(">>>FOLDER<<<<");
+      console.log('dataResponse.data: ', dataResponse.data);
+      /* console.log("dataResponse.data.path_lower", dataResponse.data.path_lower);
+      console.log('dataResponse.data.shared_folder_id: ', dataResponse.data.shared_folder_id);
+      console.log('dataResponse.data.preview_url: ', dataResponse.data.preview_url); */
+      const data = await {
+          url : dataResponse.data.preview_url,
+          folderName: dataResponse.data.name ,
+      }
+
+  } catch (e) {
+      console.log("an error ocurred sharing ", e)
+  }
+}
+
 
 exports.shareFolder = async (client,folder) => {
     console.log("tokenFromRefresh share",tokenFromRefresh)
@@ -93,15 +130,15 @@ exports.shareFolder = async (client,folder) => {
                 "acl_update_policy": "editors",
                 "force_async": false,
                 "member_policy": "anyone",
-                "path": `/datagovernance/${client}/${folder}`,
+                "path": `/datagovernance/Events/${client}/${folder}`,
                 "shared_link_policy": "anyone"
             }
         })
 
         const dataResponse = await getData;
-        console.log(dataResponse)
+        //console.log(dataResponse)
         console.log(">>>FOLDER<<<<");
-        console.log('dataResponse.data.name: ', dataResponse.data.name);
+        console.log('dataResponse.data: ', dataResponse.data);
         console.log("dataResponse.data.path_lower", dataResponse.data.path_lower);
         console.log('dataResponse.data.shared_folder_id: ', dataResponse.data.shared_folder_id);
         console.log('dataResponse.data.preview_url: ', dataResponse.data.preview_url);
@@ -109,9 +146,41 @@ exports.shareFolder = async (client,folder) => {
             url : dataResponse.data.preview_url,
             folderName: dataResponse.data.name ,
         }
-        //const dataStatus = await dataResponse.statusText==='OK' && addClientFolder(data.url,data.folderName,clientId)
-        // const dataStatus = await dataResponse.statusText==='OK' ? addClientFolder(data.url,data.folderName,clientId): createClientSharedMainFolder(clientId,data.folderName)
+        return data
     } catch (e) {
         console.log("an error ocurred sharing ", e)
     }
 }
+
+
+
+
+
+exports.createEventFolders = async (event) => {
+  console.log("tokenFromRefresh",tokenFromRefresh)
+try {
+  const getData = axios({
+    method: "post",
+    url: "https://api.dropboxapi.com/2/files/create_folder_batch",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${tokenFromRefresh}`,
+    },
+    data: {
+      autorename: false,
+      force_async: false,
+      paths: [
+        `/Datagovernance/Events/${event}/Docs`,
+        `/Datagovernance/Events/${event}/Images`,
+
+      ],
+    },
+  });
+
+  const dataResponse = await getData;
+
+  console.log("dataResponse", dataResponse.status);
+} catch (e) {
+  console.log("an error ocurred sharing ", e);
+}
+};

@@ -13,7 +13,7 @@ require('dotenv').config()
 const port = process.env.PORT || 4500
 const key=process.env.KEY
 let tokenFromRefresh;
-const {connectDropbox,createAllFolders,shareFolder,createEventFolders,shareEventMainFolder} = require ('./utils/functions.js')
+const {connectDropbox,createAllFolders,shareFolder,createEventFolders} = require ('./utils/functions.js')
 let async_job_id;
 const fs = require('fs');
 const {Blob} =require ('buffer');
@@ -223,54 +223,20 @@ app.get('/all', async (req,res)=>{
     const m =  console.log("sucess")
 })
 const event ='Alexei event test'
+
+
 app.get('/events', async (req,res)=>{
     const a = await connectDropbox()
     const b = await createEventFolders(event)
-    const c = await shareFolder(event,'Docs')
-    const mainFolderUrl= await c.url
-    const mainFolderpath =await c.folderName
-    const d = await shareFolder(event,'Images')
-    const imgUrl= await d.url
-    const imgPath =await d.folderName
-    
-    const e= await console.log("mainFolderUrl",mainFolderUrl)
-    const f= await console.log('mainpath',mainFolderpath)
-    const g= await console.log("ImgFolderUrl",imgUrl)
-    const h= await console.log('mainpath',imgPath)
-    const i= await getQRCode()
-
+    const c = await shareFolder(event,'Images')
     const m =  console.log("sucess")
 })
 
 
-// MIDDLEWARE to avoid connections if not an active user
-const getUsers = async  (req,res,next)  => {
-    let {id} = req.body
-
-    const getData = await fetch('https://my-app-mnswq.ondigitalocean.app/users')
-    const firstResponse =  await getData.json()
-    const response = await firstResponse
-    const rest= await response.filter((user)=> {
-     return user.user_id===id
-    })
-    const ress= await rest
-    const y = ress.length===0?res.send("NO ACCESS"):res.send("ACCESS OK")
-  }
-
-app.get("/middleware/",getUsers, async (req,res)=>{
-   
-res.send("exito")
-
-
-
-})
 
 app.use(getUsers)
 /* PORT */
 
 app.listen(port, () => {
-    console.log(`Example app listening  ${port}`)
+    console.log(`Example app listening on port ${port}`)
   })
-
-
-  
