@@ -54,16 +54,16 @@ exports.createAllFolders = async (client) => {
         autorename: false,
         force_async: false,
         paths: [
-          `/Datagovernance/${client}/folder1`,
-          `/Datagovernance/${client}/folder2`,
-          `/Datagovernance/${client}/folder3`,
-          `/Datagovernance/${client}/folder4`,
-          `/Datagovernance/${client}/folder5`,
-          `/Datagovernance/${client}/folder6`,
-          `/Datagovernance/${client}/folder7`,
-          `/Datagovernance/${client}/folder8`,
-          `/Datagovernance/${client}/folder9`,
-          `/Datagovernance/${client}/folder10`,
+          `/clients/${CLIENT_ID}/ACTION_PLANS`,
+          `/clients/${CLIENT_ID}/CBRA`,
+          `/clients/${CLIENT_ID}/CONSENT`,
+          `/clients/${CLIENT_ID}/IDG`,
+          `/clients/${CLIENT_ID}/INTAKE`,
+          `/clients/${CLIENT_ID}/LINKAGE_NAVIGATION`,
+          `/clients/${CLIENT_ID}/MEDICAL`,
+          `/clients/${CLIENT_ID}/MISCELLANEOUS`,
+          `/clients/${CLIENT_ID}/SUPPORT_GROUPS`,
+          `/clients/${CLIENT_ID}/TICKLER_UPDATES`,
         ],
       },
     });
@@ -77,7 +77,7 @@ exports.createAllFolders = async (client) => {
 };
 
 
-exports.shareEventMainFolder = async (client) => {
+/* exports.shareEventMainFolder = async (client) => {
   console.log("tokenFromRefresh share",tokenFromRefresh)
   try {
       const getData = axios({
@@ -98,12 +98,10 @@ exports.shareEventMainFolder = async (client) => {
       })
 
       const dataResponse = await getData;
-      //console.log(dataResponse)
+      //BH console.log(dataResponse)
       console.log(">>>FOLDER<<<<");
       console.log('dataResponse.data: ', dataResponse.data);
-      /* console.log("dataResponse.data.path_lower", dataResponse.data.path_lower);
-      console.log('dataResponse.data.shared_folder_id: ', dataResponse.data.shared_folder_id);
-      console.log('dataResponse.data.preview_url: ', dataResponse.data.preview_url); */
+
       const data = await {
           url : dataResponse.data.preview_url,
           folderName: dataResponse.data.name ,
@@ -112,7 +110,7 @@ exports.shareEventMainFolder = async (client) => {
   } catch (e) {
       console.log("an error ocurred sharing ", e)
   }
-}
+} */
 
 
 exports.shareFolder = async (client,folder) => {
