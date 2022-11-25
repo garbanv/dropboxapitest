@@ -12,18 +12,10 @@ const buffer = require('buffer/').Buffer;
 require('dotenv').config()
 const port = process.env.PORT || 4500
 const key=process.env.KEY
-let tokenFromRefresh;
-const {connectDropbox,createAllFolders,shareFolder} = require ('./utils/functions.js')
-let async_job_id;
 
 
-const folders = [
-    'folder1','folder2','folder3','folder4','folder5','folder6','folder7','folder8','folder9','folder10'
-]
-
-const client ='A1234G'
-
-
+/* const key='sl.BQPN1Tfi4oWb4GUQ9pHMCdS-amVxeB9p62YYcMaCNjsnml9xOwV2j-38QhCSMcnF9fvauoZnEX8D4WN95iogZZAeSrOFdnStxMaREUQ8boIsX5lHMc06IhLcegnNDlw--DW761479rY'
+ */let async_job_id;
 
 createMainFolder = async () => {
     console.log("main")
