@@ -11,41 +11,8 @@ const { URLSearchParams } = require('node:url');
 const buffer = require('buffer/').Buffer;
 require('dotenv').config()
 const port = process.env.PORT || 4500
-
-/* const key=process.env.KEY
+const key=process.env.KEY
 let tokenFromRefresh;
- */
-
-const key='sl.BQPN1Tfi4oWb4GUQ9pHMCdS-amVxeB9p62YYcMaCNjsnml9xOwV2j-38QhCSMcnF9fvauoZnEX8D4WN95iogZZAeSrOFdnStxMaREUQ8boIsX5lHMc06IhLcegnNDlw--DW761479rY'
-let async_job_id;
-
-
-
- const connectDropbox=async ()=>{
-    const clientIdSecretEncoded = buffer.from(`${process.env.DBXCLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64');
-      const urlencoded = new URLSearchParams();
-      urlencoded.append("grant_type", "refresh_token");
-      urlencoded.append("refresh_token", process.env.DBX_REFRESH_TOKEN);
-      const requestOptions = {
-         method: 'POST',
-          headers: {
-              "Authorization": `Basic ${clientIdSecretEncoded}`,
-              "Content-Type": "application/x-www-form-urlencoded"
-          },
-          body: urlencoded,
-          redirect: 'follow'
-      };
-      try {
-        const res= fetch("https://api.dropbox.com/oauth2/token", requestOptions)
-        const response = await res
-        const response1 = await response.json()
-        const accessTokenResult = await response1.access_token
-        tokenFromRefresh = await accessTokenResult
-
-       }
-        catch{
-            (error => console.log('error from connectDropboxAndCreateFolders', error))}
-
 const {connectDropbox,createAllFolders,shareFolder} = require ('./utils/functions.js')
 let async_job_id;
 
@@ -55,6 +22,8 @@ const folders = [
 ]
 
 const client ='A1234G'
+
+
 
 createMainFolder = async () => {
     console.log("main")
